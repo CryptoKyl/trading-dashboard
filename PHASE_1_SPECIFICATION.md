@@ -1,10 +1,10 @@
-# TRADING DASHBOARD - PHASE 1 SPECIFICATION
+# TRADING DASHBOARD - KOMPLETNA SPECIFIKACIJA
 
-**Verzija:** 2.0
-**Datum:** Svibanj 2026
-**Status:** FINALIZIRAN
-**GitHub:** https://github.com/CryptoKyl/Aplikacija-za-trejdanje
-**Supabase:** https://cpuhymueefwzozimqdjj.supabase.co
+**Verzija:** 3.0  
+**Datum:** Svibanj 2026  
+**Status:** U RAZVOJU  
+**GitHub:** https://github.com/CryptoKyl/Aplikacija-za-trejdanje  
+**Supabase:** https://cpuhymueefwzozimqdjj.supabase.co  
 
 ---
 
@@ -19,69 +19,73 @@
 7. Asset Kartice
 8. Asset Detail View + Risk Calculator
 9. Risk Engine Tab
-10. Search
-11. Favorites & Pinning
-12. Bulk Actions
-13. Watchlist Sharing & Import
-14. Admin Panel
-15. Notifikacije - Arhitektura
-16. Offline Support
-17. Dark/Light Mode
-18. Charts & Grafici
-19. Baza Podataka - Supabase
-20. Struktura Projekta
-21. Inicijalni Testni Podaci
-22. Trgovacka Pravila & Logika
-23. Roadmap - Faza 2+
+10. Fundamentalne Metrike
+11. AI Analiza Financijskih Izvjestaja
+12. Search
+13. Favorites & Pinning
+14. Bulk Actions
+15. Watchlist Sharing & Import
+16. Admin Panel
+17. Notifikacije - Arhitektura
+18. Offline Support
+19. Dark/Light Mode
+20. Charts & Grafici
+21. Baza Podataka - Supabase
+22. Struktura Projekta
+23. Inicijalni Testni Podaci
+24. Trgovacka Pravila & Logika
+25. Price API - Strategija
+26. Roadmap - Sve Faze
 
 ---
 
 ## 1. OVERVIEW
 
 ### Sto je aplikacija?
-Mobilna Trading Dashboard aplikacija za tradere koji trebaju brzu analizu asset-a sa jasnim signalima iz Hurst ciklusa i Supply/Demand zona.
+Mobilna Trading Dashboard aplikacija za tradere koji trebaju brzu analizu asset-a sa jasnim signalima iz Hurst ciklusa i Supply/Demand zona. Aplikacija automatski trazi signale, prati fundamentalne metrike i koristi AI za analizu financijskih izvjestaja.
 
-### Cilj Faze 1
-Izgraditi vizualni kostur i core funkcionalnosti sa dummy podacima. Bez live API integracije - samo testiranje UI-ja i logike.
+### Cilj
+Izgraditi profesionalni trading tool koji pokriva:
+- Tehnicku analizu (Hurst ciklusi, S&D zone)
+- Fundamentalnu analizu (50+ metrika)
+- AI analizu financijskih izvjestaja
+- Live cijene za US, EU i australske dionice
+- Notifikacije u realnom vremenu
 
-### MVP - Minimalni Pocetak
-```
-KORAK 1: Setup projekta
-KORAK 2: Login stranica (vizualno)
-KORAK 3: Watchlist sa dummy karticama
-KORAK 4: Asset Detail View + Risk Calculator
-KORAK 5: Testiranje na mobu
-KORAK 6: Spajanje sa Supabase
-KORAK 7: Login funkcionalan (pravi PIN)
-KORAK 8: Podaci iz baze (ne dummy)
---- MVP GOTOV ---
-KORAK 9+: Dodajemo ostale funkcije
-```
+### Korisnik
+- Primarily mobitel (iOS/Android)
+- US dionice, EU dionice, Australske dionice (ASX)
+- Osobna upotreba + potencijalno vise korisnika
 
 ### Radni Principi
 - Radimo iterativno, fazu po fazu
-- Prvo vizualni kostur, onda baza i API-ji
-- Kod se direktno upisuje na GitHub web interface (copy/paste)
-- Korisnik nema iskustva s programiranjem
+- Mobile-first dizajn (390px base)
+- Kod se razvija u Cursor editoru s Claude AI pomocju
 
 ---
 
 ## 2. TECH STACK
 
-| Tehnologija | Svrha |
-|---|---|
-| Next.js 14+ (App Router) | Frontend framework |
-| TypeScript | Type-safety |
-| Tailwind CSS | Styling |
-| shadcn/ui | UI Komponente |
-| Supabase PostgreSQL | Baza podataka |
-| Supabase Auth | Autentifikacija via PIN |
-| yfinance | Live cijene (Faza 2+) |
-| TradingView Lightweight Chart | Grafici (gotova libraru) |
-| IndexedDB | Offline cache |
-| QR Code Generator | Share watchlist |
+| Tehnologija | Svrha | Status |
+|---|---|---|
+| Next.js 14+ (App Router) | Frontend framework | ✅ Implementirano |
+| TypeScript | Type-safety | ✅ Implementirano |
+| Tailwind CSS | Styling | ✅ Implementirano |
+| shadcn/ui | UI Komponente | ✅ Implementirano |
+| Supabase PostgreSQL | Baza podataka | ✅ Implementirano |
+| Supabase Auth | Autentifikacija via PIN | ⬜ Faza 4 |
+| Yahoo Finance (direktni fetch) | Live cijene (privremeno) | ✅ Implementirano |
+| Polygon.io | Live cijene US + EU (profesionalno) | ⬜ Faza 5 |
+| Financial Modeling Prep | Fundamentalne metrike + vijesti | ⬜ Faza 8 |
+| Claude API | AI analiza izvjestaja | ⬜ Faza 9 |
+| Vercel | Hosting/Deploy | ⬜ Faza 3 |
+| TradingView Lightweight Chart | Grafici | ⬜ Faza 4 |
+| Firebase Cloud Messaging | Push notifikacije | ⬜ Faza 5 |
+| SendGrid | Email notifikacije | ⬜ Faza 5 |
+| IndexedDB | Offline cache | ⬜ Faza 6 |
+| Capacitor.js | Native app (App Store) | ⬜ Faza 10+ |
 
-### Smart Refresh (Faza 2+)
+### Smart Refresh
 - 10 sekundi za assets u ACTION ZONE ili DVOSTRUKI SIGNAL
 - 60 sekundi za ostale assets
 
@@ -92,35 +96,34 @@ KORAK 9+: Dodajemo ostale funkcije
 ### Tema
 - Dark Mode (primary) + Light Mode opcija
 - Glassmorphism efekt na svim karticama
-- Neonske zelene akcente
+- Neonske zelene akcente (#00ff88)
+- Font: Space Grotesk (ne Inter)
 
 ### Pozadina
-```
-background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+```css
+background: #0a0e1a;
+background-image: 
+  linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+background-size: 24px 24px;
 ```
 
 ### Glassmorphism Kartice
-```
-background: rgba(255, 255, 255, 0.05);
-backdrop-filter: blur(20px);
-border: 1px solid rgba(255, 255, 255, 0.1);
-```
-
-### Font
-```
-font-family: 'Inter', sans-serif;
-font-variant-numeric: tabular-nums;
-letter-spacing: -0.02em;
+```css
+background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(255, 255, 255, 0.08);
+box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
 ```
 
 ### Status Boje
 
 | Status | Hex | Efekt |
 |---|---|---|
-| DVOSTRUKI SIGNAL | #10B981 | Glow pulsira beskonacno |
-| ACTION ZONE | #22C55E | Staticno |
-| CIKLUS AKTIVAN | #F59E0B | Staticno |
-| STOP LOSS | #EF4444 | Staticno |
+| DVOSTRUKI SIGNAL | #00ff88 | Glow pulsira beskonacno |
+| ACTION ZONE | #3b82f6 | Staticno |
+| CIKLUS AKTIVAN | #f59e0b | Staticno |
+| STOP LOSS | #ef4444 | Staticno |
 
 ### Animacije
 
@@ -131,23 +134,11 @@ letter-spacing: -0.02em;
 | Smooth (bar fill) | 600ms |
 | Glow pulsiranje (DVOSTRUKI SIGNAL) | 2s infinite |
 
-### Hover Efekt na Karticama
-```
-transform: translateY(-4px);
-box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-border-color: rgba(255, 255, 255, 0.2);
-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-```
-
-### Active State
-```
-transform: scale(0.98);
-```
-
-### Mobile-First Breakpoints
-- Mobile: default
-- Tablet: 640px+
-- Desktop: 1024px+
+### Mobile-First
+- Base width: 390px
+- Max width: 430px
+- Centriran na vecim ekranima
+- Bottom nav: fiksna, 64px visina
 
 ---
 
@@ -156,54 +147,45 @@ transform: scale(0.98);
 ### Layout Ekrana
 ```
 +---------------------------------------+
-|  Hamburger (/)       Search (Lupa)    |  <- Gornji red (fiksan)
+|  Hamburger        Title    Search     |  <- Header (fiksan)
 +---------------------------------------+
 |                                       |
 |  [Sadrzaj ovisno o tab-u]             |
 |                                       |
 +---------------------------------------+
-|  Watchlist  |  Risk Engine            |  <- Bottom Nav (fiksan)
-|      (dot)                            |
+|  Watchlist | Risk Engine | Organizacija|  <- Bottom Nav (fiksan)
 +---------------------------------------+
 ```
 
 ### Bottom Navigation
 - Watchlist - glavni tab
 - Risk Engine - kalkulator pozicija
-- Active indicator: Tockica ispod aktivnog taba
-- Stil: Glassmorphism pozadina, rounded-t-3xl, floating shadow sa sjenom
+- Organizacija - upravljanje assetima
+- Active indicator: Tockica ispod aktivnog taba + neon zelena boja
 
-### Hamburger Menu - Gornji Lijevi Kut
-Dostupan na SVIM tab-ovima. Slide-out panel s lijeva.
-Pozadina se zamucuje (blur) kada je menu otvoren.
+### Hamburger Menu
+Slide-out panel, glassmorphism pozadina.
 
 ```
 +----------------------------------+
 |  X  POSTAVKE                     |
 +----------------------------------+
-|                                  |
 |  Watchlist Management            |
 |    -> Kreiraj novu               |
 |    -> Import watchlist           |
 |                                  |
 |  Displej                         |
 |    -> Sort by: Status            |
-|    -> Dark Mode  [toggle ON]     |
-|    -> Light Mode [toggle OFF]    |
+|    -> Dark Mode  [toggle]        |
+|    -> Light Mode [toggle]        |
 |                                  |
 |  Profil                          |
-|    -> marko@gmail.com (read-only)|
+|    -> email (read-only)          |
 |                                  |
-|  Admin Panel  <- SAMO ZA ADMINA  |
-|  (posebna zlatna/narancasta boja)|
-|                                  |
-|  Odjava (crvena boja)            |
-|                                  |
+|  Admin Panel (samo admin)        |
+|  Odjava (crvena)                 |
 +----------------------------------+
 ```
-
-### Search - Gornji Desni Kut
-Globalni search kroz sve dostupne assets.
 
 ---
 
@@ -213,7 +195,7 @@ Globalni search kroz sve dostupne assets.
 ```
 Email + 6-znamenkasti PIN
         |
-Supabase provjeri
+Supabase Auth provjeri
         |
 OK  -> JWT token -> Dashboard
 FAIL -> "Pogresni podaci"
@@ -221,22 +203,11 @@ FAIL -> "Pogresni podaci"
 
 ### Admin Korisnik
 - Email: marko31071985@gmail.com
-- Uloga: Automatski admin (definirano u bazi)
-- Pristup: Watchlist + Risk Engine + Admin Panel
+- Pristup: Sve + Admin Panel
 
 ### Obicni Korisnici
-- Dodavanje: SAMO Admin rucno dodaje (kopira email, upise PIN)
-- Brisanje: SAMO Admin moze obrisati
-- PIN mijenjanje: Planira se za Fazu 2+
-
-### Kako Admin Dodaje Korisnika
-```
-1. Korisnik posalje email Adminu
-2. Admin ide Admin Panel -> User Management
-3. Unese email + PIN
-4. Klikne Dodaj korisnika
-5. Korisnik se prijavljuje sa email + PIN
-```
+- Dodaje ih SAMO Admin
+- PIN mijenjanje: Faza 4+
 
 ---
 
@@ -245,956 +216,988 @@ FAIL -> "Pogresni podaci"
 ### Vrste Watchlist-a
 
 #### Default Watchlist (Admin Postavlja)
-- SAMO admin moze dodavati/uklanjati assets i parametre
-- Korisnici mogu samo gledati i filtrirati
-- Moze biti vise default watchlista
-- Admin NE MOZE mijenjati custom watchliste korisnika
+- Samo admin moze mijenjati
+- Korisnici samo gledaju i filtriraju
 
 #### Custom Watchlist (Korisnik Kreira)
+- Neogranicen broj
+- Dodavanje assets iz default liste ili bilo kojeg asset-a
+- Korisnik definira koje parametre vidi na kartici
 
-Korisnik MOZE:
-- Kreirati neogranicen broj custom watchlista
-- Dodavati assets iz default liste ILI bilo koji asset koji platforma podrzava
-- Uklanjati assets iz svoje watchliste
-- Uredivati parametre za asset u SVOJOJ watchlisti
-- Preuzeti parametre iz default liste pri dodavanju
-- Mijenjati preuzete parametre
-- Dodavati nove parametre (npr. P/E ratio)
-- Filtrirati koje parametre vidi na kartici (checkbox)
-- Preimenovati i brisati watchlistu
-- Dijeliti watchlistu s drugim korisnicima
-
-Korisnik NE MOZE:
-- Mijenjati tude watchliste
-- Mijenjati default watchlistu
-- Imati dvije watchliste s istim imenom
-
-### Dropdown za Prebacivanje
+### Dropdown
 ```
 Default Watchlist (v)
-  -> Default Watchlist (samo view)
-  -> My Metals (edit)
-  -> Energy Plays (edit)
-  -------------------------
+  -> Default Watchlist
+  -> My Metals
+  -> Energy Plays
+  ─────────────────
   -> + Nova Watchlist
-  -> Postavke Watchliste
 ```
 
 ---
 
 ## 7. ASSET KARTICE
 
-### Pulse Metrike (Vrh Watchlist Stranice)
+### Pulse Metrike (Vrh Stranice)
 ```
-+--------+-----------------+-----------+-----------------+----------+
-|  [12]  |    [3]          |   [5]     |    [2]          |  [1]     |
-| Ukupno | Dvostruki Signal| Action    | Ciklus Aktivan  | Stop Loss|
-| asseta | (zeleno pulsira)| Zone      | (naranzasta)    | (crvena) |
-+--------+-----------------+-----------+-----------------+----------+
-```
-
-Svaka metrika je u zasebnoj okrugloj kartici sa odgovarajucom bojom.
-
-### Filter Radio Buttons
-```
-( ) SVE | ( ) DVOSTRUKI SIGNAL | ( ) ACTION ZONE | ( ) CIKLUS AKTIVAN | ( ) STOP LOSS
++--------+-----------+---------+----------+----------+
+|  [12]  |   [3]     |   [5]   |   [2]    |   [1]    |
+| Ukupno | Dvostruki | Action  |  Ciklus  |   Stop   |
+| asseta |  Signal   |  Zone   | Aktivan  |   Loss   |
++--------+-----------+---------+----------+----------+
 ```
 
-### Izgled Kartice (AssetCardMedium) - NOVI DIZAJN
+### Filter Pills
+```
+[SVE] [DVOSTRUKI SIGNAL] [ACTION ZONE] [CIKLUS AKTIVAN] [STOP LOSS]
+```
 
-VAZNO: Svaka kartica ima MINI CHART u pozadini/donjem dijelu!
+### Izgled Kartice
 
 ```
 +===================================================+
-|  NICK  [H]        $26.23        +1.5%            |
-|  Nickel Futures                                   |
+|  NICK H  Nickel Futures    [DVOSTRUKI SIGNAL]     |
+|  $26.23  ▲ +1.50%                                |
 |                                                   |
-|  [DVOSTRUKI SIGNAL badge]                         |
+|  [================================] Unutar zone   |
+|  (proximity bar)                                  |
 |                                                   |
-|  [===========================---] Proximity Bar   |
-|  (zelena/naranzasta/crvena ovisno o statusu)      |
-|                                                   |
-|  Demand: $26.00 - $28.00                         |
-|  Stop Loss: $25.50                               |
-|  SFP Invalid: $25.20                             |
-|                                                   |
-|  [Mini Chart 24h - linijski, suptilan]           |
-|                                                   |
-|  [Ciklus za 3 dana chip]                         |
+|  💰 Demand: $26.00-$28.00  🛡 Stop Loss: $25.50  |
+|  ⚠️ SFP Invalid: $25.20   🔄 3 dana              |
 +===================================================+
 ```
 
-### Mini Chart NA Karticama (NOVO!)
-- Mala linijska krivulja u donjem dijelu kartice
-- Suptilna, ne zauzima previse prostora
-- Boja prati status (zelena za signal, narancasta za ciklus, crvena za stop loss)
-- Faza 1: Dummy podaci (sinusni val)
-- Faza 2+: Stvarni podaci iz yfinance
-
-### Proximity Bar na Karticama (MINI verzija)
-- Tanka linija (4-6px visina)
-- Boja prati status kartice
-- Prikazuje postotak udaljenosti od demand zone
+### Swipe to Delete
+- Swipe lijevo -> pojavi se "Obriši" gumb
 
 ### Status Badge
 
-| Status | Trigger | Boja | Efekt |
-|---|---|---|---|
-| DVOSTRUKI SIGNAL | Cijena u zoni + Hurst ciklus aktivan | #10B981 | Glow pulsira |
-| ACTION ZONE | Cijena unutar demand zone | #22C55E | Staticno |
-| CIKLUS AKTIVAN | Hurst ciklus aktivan, ceka zonu | #F59E0B | Staticno |
-| STOP LOSS | Cijena ispod stop lossa | #EF4444 | Staticno |
-
-### Confidence Badge
-- H (High) - visoka vjerojatnost setup-a
-- L (Low) - niza vjerojatnost
-- M (Medium) - srednja vjerojatnost
+| Status | Trigger |
+|---|---|
+| DVOSTRUKI SIGNAL | Cijena u zoni + Hurst ciklus aktivan |
+| ACTION ZONE | Cijena unutar demand zone |
+| CIKLUS AKTIVAN | Hurst ciklus aktivan, ceka zonu |
+| STOP LOSS | Cijena ispod stop loss razine |
 
 ---
 
 ## 8. ASSET DETAIL VIEW + RISK CALCULATOR
 
 ### Otvaranje
-Korisnik klikne na asset karticu -> Slide-up sheet od dna ekrana (85% visine ekrana)
+Klik na karticu -> Slide-up sheet (85% visine ekrana)
 
-### Layout
+### Tabovi u Detail View
+```
+[Tehnicki] [Fundamentali] [Vijesti]
+```
+
+### Layout - Tehnicki Tab
 ```
 +------------------------------------------+
-|  <- NICK H                           X   |
-+------------------------------------------+
+|  <- NICK H                [DVOSTRUKI]  X |
+|  $26.23  ▲ +1.50%                        |
 |                                          |
-|  $26.23  +1.5%   [DVOSTRUKI SIGNAL]     |
+|  BLIZINA CIJENE / PROXIMITY BAR          |
+|  ┌────────────────────────────────────┐  |
+|  │         $26.23                     │  |
+|  │            ↓                       │  |
+|  │ [DZ][=====|========-------][SL]    │  |
+|  │ $26.00  zeleno->zuto->crveno $25.50│  |
+|  │ "Cijena unutar Demand Zone.        │  |
+|  │  Blizina Stop Loss-a je 2.86%"     │  |
+|  └────────────────────────────────────┘  |
 |                                          |
-|  == BLIZINA CIJENE / PROXIMITY BAR ======|
+|  PARAMETRI                               |
+|  Demand: $26.00-$28.00                   |
+|  Supply: $30.00-$31.50                   |
+|  Stop Loss: $25.50                       |
+|  SFP Invalid: $25.20                     |
+|  Timing: 3 dana                          |
+|  Hurst Bias: Bullish Correction          |
 |                                          |
-|           $26.23 (marker)               |
-|               |                         |
-|  [DZ] [=======|=========-------] [SL]   |
-|  $26.00   (zeleno -> crveno)   $25.50   |
-|  Demand Zone              Stop Loss     |
+|  MINI CHART 24h                          |
+|  [Linijski grafik - interaktivan]        |
+|  [Otvori TradingView]                    |
 |                                          |
-|  "Cijena je unutar Demand Zone.         |
-|   Blizina Stop Loss-a je 2.86%"         |
+|  RISK CALCULATOR                         |
+|  Capital:    [5000]  Risk%: [2]          |
+|  Risk iznos:  $100 (auto)                |
+|  Entry:      [26.50]                     |
+|  Stop Loss:  [25.50] (auto-fill)         |
+|  Target:     [30.00]                     |
 |                                          |
-|  == PARAMETRI ===========================|
+|  Position Size:    200 akcija            |
+|  Potential Profit: $700                  |
+|  Risk/Reward:      1:7                   |
 |                                          |
-|  zones:                                  |
-|    Demand Zone:  $26.00 - $28.00        |
-|    Supply Zone:  $30.00 - $31.50        |
-|                                          |
-|  risk:                                   |
-|    Stop Loss:    $25.50                 |
-|    SFP Invalid:  $25.20                 |
-|                                          |
-|  timing:                                 |
-|    Cycle:        3 dana                 |
-|    Hurst Bias:   Bullish Correction     |
-|                                          |
-|  == MINI CHART 24h ======================|
-|  +--------------------------------------+|
-|  |  [Linijski grafik 24h - interaktivan]||
-|  +--------------------------------------+|
-|  [Otvori TradingView]                   |
-|                                          |
-|  == RISK CALCULATOR =====================|
-|                                          |
-|  Capital:      [5000    ]               |
-|  Risk %:       [2       ]               |
-|  Risk Amount:   $100 (auto-calc)        |
-|                                          |
-|  Entry Price:  [26.50   ]               |
-|  Stop Loss:    [25.50   ] (auto-fill)   |
-|  Target Price: [30.00   ]               |
-|                                          |
-|  -- REZULTATI ---------------------------+
-|  Position Size:       200 akcija        |
-|  Potential Profit:    $700              |
-|  Risk/Reward Ratio:   1:7              |
-|                                          |
-|  [Izracunaj]        [Reset]             |
-|                                          |
+|  [Izracunaj]        [Reset]              |
 +------------------------------------------+
 ```
 
-### NOVI DIZAJN - Full Proximity Visual (NOVO!)
-
-Umjesto jednostavnog progress bara, u Asset Detail View prikazujemo:
-
+### Layout - Fundamentalni Tab
 ```
-BLIZINA CIJENE / PROXIMITY BAR
-(glassmorphism kartica)
-
-         $26.23
-            |
-[DZ] [======|==========----------] [SL]
-$26.00   Zeleno -> Zuto -> Crveno   $25.50
-Demand Zone                    Stop Loss
-
-Tekst ispod: "Cijena je unutar Demand Zone.
-              Blizina Stop Loss-a je 2.86%"
-```
-
-Karakteristike Full Proximity Visual-a:
-- Gradijent boja: zelena (demand zona) -> zuta (sredina) -> crvena (stop loss)
-- Marker/pointer koji pokazuje tocnu poziciju cijene
-- DZ oznaka lijevo (Demand Zone)
-- SL oznaka desno (Stop Loss)
-- Tekst objasnjenje ispod (dinamicki)
-- Glassmorphism kartica oko cijelog elementa
-
-### Parametri - Dinamicka Arhitektura
-```typescript
-interface AssetParameter {
-  id: string;
-  label: string;
-  value: string | number;
-  icon?: string;
-  category?: 'zones' | 'risk' | 'timing' | 'market' | 'fundamentals';
-  format?: 'currency' | 'percentage' | 'text';
-}
++------------------------------------------+
+|  VALUACIJA                               |
+|  P/E:        28.5   Sektor avg: 22.1    |
+|  Forward P/E: 24.2                       |
+|  P/B:        45.2   🟢 Odlicno          |
+|  EV/EBITDA:  22.1                        |
+|                                          |
+|  PROFITABILNOST                          |
+|  ROE:        147%   🟢 Odlicno          |
+|  Net Margin:  25%   🟢 Odlicno          |
+|  Debt/Eq:    1.8x   🟡 Srednje          |
+|                                          |
+|  EARNINGS                                |
+|  EPS Actual:    $2.18                    |
+|  EPS Estimate:  $2.10                    |
+|  EPS Surprise:  +3.8% ✅ BEAT           |
+|  Sljedeci izvjestaj: 15.08.2026          |
+|                                          |
+|  ANALYST                                 |
+|  Rating: BUY (18/24 analitičara)        |
+|  Price Target: $220 (avg)               |
++------------------------------------------+
 ```
 
-Dodavanje novog parametra = samo dodaj novi objekt u niz. Nema mijenjanja koda!
+### Layout - Vijesti Tab
+```
++------------------------------------------+
+|  🤖 AI SAZETAK (najnoviji izvjestaj)     |
+|  ┌────────────────────────────────────┐  |
+|  │ Q4 2024: BEAT EPS +3.8%           │  |
+|  │ Services +16% YoY, iPhone -3%     │  |
+|  │ Outlook: Pozitivan za Q1 2025     │  |
+|  │ Sentiment: 🟡 NEUTRALNO           │  |
+|  └────────────────────────────────────┘  |
+|                                          |
+|  VIJESTI                                 |
+|  • Apple najavljuje novi iPhone...       |
+|    Reuters - prije 2 sata               |
+|  • Goldman Sachs podigao target...      |
+|    Bloomberg - prije 5 sati             |
++------------------------------------------+
+```
 
 ### Risk Calculator Formule
 ```
 Position Size   = Risk Amount / (Entry - Stop Loss)
-                  Npr: $100 / ($26.50 - $25.50) = 100 akcija
-
 Potential Profit = (Target - Entry) x Position Size
-                   Npr: ($30 - $26.50) x 100 = $350
-
 Risk/Reward      = Profit / Risk
-                   Npr: $350 / $100 = 3.5:1
 ```
-
-VAZNO: Faza 1 - NEMA SPREMA rezultata. Samo pregled.
 
 ---
 
 ## 9. RISK ENGINE TAB
 
-### Layout
+### Tabovi
 ```
-+------------------------------------------+
-|  Risk Engine                             |
-+------------------------------------------+
-|                                          |
-|  Odaberi Asset: [dropdown ili search]    |
-|                                          |
-|  == INPUTS ==============================|
-|  Capital:      [5000    ]               |
-|  Risk %:       [2       ]               |
-|  Risk Amount:   $100 (auto-calc)        |
-|                                          |
-|  Entry Price:  [26.50   ]               |
-|  Stop Loss:    [25.50   ]               |
-|  Target Price: [30.00   ]               |
-|                                          |
-|  == REZULTATI ===========================|
-|  Position Size:       200 akcija        |
-|  Potential Profit:    $700              |
-|  Risk/Reward Ratio:   1:7              |
-|                                          |
-|  [Izracunaj]        [Reset]             |
-|                                          |
-+------------------------------------------+
+[Osnovni] [Ladder (Skaliranje)]
 ```
 
-VAZNO: Faza 1 - NEMA SPREMA trade setup-a. Planira se Faza 2+.
+### Osnovni Kalkulator
+```
+Kapital:        [5000]
+Risk %:         [2]
+Risk iznos:     $100 (auto)
+Cijena ulaza:   [26.50]
+Stop Loss:      [25.50]
+Target cijena:  [30.00]
+
+--- REZULTATI ---
+Velicina pozicije: 200 akcija
+Potencijalni profit: $700
+Risk/Reward: 1:7
+
+[Izracunaj] [Reset]
+```
+
+### Ladder (Fibonacci Skaliranje)
+```
+Rasporedivanje naloga kroz zonu:
+
+Fib 0.618:  $27.27  → 40% kapitala  → 80 akcija
+Fib 0.702:  $26.90  → 35% kapitala  → 70 akcija
+Fib 0.786:  $26.50  → 25% kapitala  → 50 akcija
+
+Ukupno: 200 akcija, $100 risk
+```
+
+### Compounding Kalkulator (Faza 7)
+```
+Original Entry:  $26.50  (100 akcija)
+New Entry:       $27.00  (50 akcija)
+New Stop Loss:   $26.20
+
+Novi prosjek ulaza: $26.67
+Add size: 33% dodatka
+```
 
 ---
 
-## 10. SEARCH
+## 10. FUNDAMENTALNE METRIKE
 
-### Gdje
-Ikona lupe u gornjem desnom kutu - dostupna na svim tab-ovima.
+### 50+ Metrika po Kategorijama
 
-### Logika Pretrazivanja
+#### VALUACIJA
 ```
-Korisnik unese: "NICK" ili "Nickel"
+P/E Ratio, Forward P/E, P/B Ratio, P/S Ratio,
+P/FCF, EV/EBITDA, EV/Revenue, PEG Ratio,
+Dividend Yield, Enterprise Value
+```
 
+#### PROFITABILNOST
+```
+ROE, ROA, ROIC, Gross Margin %, Operating Margin %,
+Net Margin %, EBITDA Margin, FCF Margin,
+Return on Capital Employed
+```
+
+#### RAST
+```
+Revenue Growth YoY, Revenue Growth QoQ,
+EPS Growth YoY, EPS Growth QoQ,
+FCF Growth, EBITDA Growth,
+User/Subscriber Growth (za tech)
+```
+
+#### FINANCIJSKA SNAGA
+```
+Debt/Equity, Current Ratio, Quick Ratio,
+Interest Coverage, Debt/EBITDA,
+Cash per Share, Net Cash/Debt,
+Working Capital
+```
+
+#### EARNINGS
+```
+EPS Actual, EPS Estimate, EPS Surprise %,
+Revenue Actual, Revenue Estimate, Revenue Surprise %,
+Next Earnings Date, Earnings Calendar
+```
+
+#### DIVIDENDE
+```
+Dividend per Share, Payout Ratio,
+Dividend Growth 5Y, Ex-Dividend Date,
+Dividend History
+```
+
+#### INSIDER & INSTITUCIJE
+```
+Insider Ownership %, Institutional Ownership %,
+Short Interest %, Insider Buying/Selling,
+52W High/Low, Float
+```
+
+#### ANALYST
+```
+Analyst Rating (Buy/Hold/Sell), 
+Price Target (avg/high/low),
+Number of Analysts, Upgrades/Downgrades
+```
+
+### Prikazivanje Metrika
+
+#### Na Kartici (2-3 metrike po izboru)
+```
+Korisnik definira koje 2-3 metrike vidi direktno na kartici.
+Npr: P/E | ROE | Next Earnings
+```
+
+#### U Detail View - Fundamentalni Tab
+```
+Sve metrike grupirane po kategorijama.
+Color coding:
+🟢 Zeleno = odlicno (gornji kvartil sektora)
+🟡 Zuto   = srednje
+🔴 Crveno = losije od prosjeka sektora
+```
+
+#### Usporedba sa Sektorom
+```
+P/E: 28.5  |  Sektor prosjek: 22.1  |  +29% iznad prosjeka
+```
+
+### API za Fundamentale
+- **Financial Modeling Prep (FMP)**: $19/mj
+- Pokriva: US dionice, EU dionice, ASX dionice
+- Podaci: Svi financijski izvjestaji, ratios, earnings, vijesti
+
+---
+
+## 11. AI ANALIZA FINANCIJSKIH IZVJESTAJA
+
+### Koncept
+```
+1. FMP API detektira novi earnings izvjestaj
+         ↓
+2. Webhook triggera nasu aplikaciju
+         ↓
+3. Dohvacamo puni izvjestaj (PDF/JSON)
+         ↓
+4. Saljemo Claude API-ju na analizu
+         ↓
+5. Claude vraca strukturirani sazetak
+         ↓
+6. Prikazujemo u aplikaciji + saljem notifikacije
+```
+
+### Claude API Prompt Struktura
+```
+"Analiziraj ovaj earnings izvjestaj i vrati JSON s:
+- sazetak (3-5 recenica)
+- kljucni_brojevi (EPS beat/miss, Revenue beat/miss)
+- menadžment_komentar (sto su rekli o buducnosti)
+- rizici (sto su naveli kao rizike)
+- sentiment (Bullish/Bearish/Neutral)
+- ocjena (1-10)"
+```
+
+### Primjer AI Sazetka
+```
+📊 APPLE (AAPL) — Q4 2024 Earnings
+
+✅ BEAT EPS: $2.18 vs $2.10 (+3.8%)
+❌ MISS Revenue: $89.5B vs $90.1B (-0.7%)
+
+Sazetak: Solidni rezultati uz snazni rast Services 
+segmenta (+16% YoY) koji kompenzira slabiji iPhone 
+(-3% YoY). Menadžment dao pozitivan Q1 2025 outlook.
+
+Rizici: Kina tržiste (-8% YoY), EU regulacija App Store.
+
+Sentiment: 🟡 NEUTRALNO
+
+Goldman Sachs: Maintain BUY $220
+Morgan Stanley: Maintain OW $230
+```
+
+### Earnings Calendar Widget
+```
+Ovaj tjedan:
+├── Pon: AAPL (after market) ← sutra!
+├── Sri: MSFT (after market)
+└── Pet: HAL (before market)
+```
+
+### Notifikacija pri Novom Izvjestaju
+```
+Push: "📊 AAPL upravo objavio Q4! EPS BEAT +3.8%"
+       Klikni za AI sazetak →
+```
+
+### Trosak
+- Claude API: ~$0.01 po izvjestaju
+- Za 50 asseta godisnje = ~$2-5/god
+
+---
+
+## 12. SEARCH
+
+### Logika
+```
 PRIORITET 1 - U korisnikovim watchlistama:
-  Default Watchlist -> NICK (prikazi prvi)
+  Default Watchlist -> NICK
   My Metals -> NICK
-  Energy Plays -> NICK
 
-PRIORITET 2 - Dostupni (nisu u nijednoj watchlisti):
+PRIORITET 2 - Dostupni assets:
   Svi assets koje platforma podrzava
 ```
 
-### UI Rezultati
+### UI
 ```
-+-------------------------------------+
-|  [NICK_____________]    [X]         |
-+-------------------------------------+
-|  U TVOJIM WATCHLISTAMA:             |
-|                                     |
-|  Default Watchlist                  |
-|  NICK H | $26.23 | +1.5%           |
-|                    [Otvori ->]      |
-|                                     |
-|  DOSTUPNI ZA DODAVANJE:             |
-|  NICK | Nickel Futures | $26.23     |
-|             [+ Dodaj u watchlistu]  |
-+-------------------------------------+
+[NICK_____________] [X]
+
+U TVOJIM WATCHLISTAMA:
+  NICK H | $26.23 | +1.5%     [Otvori →]
+
+DOSTUPNI ZA DODAVANJE:
+  NICK | Nickel | $26.23      [+ Dodaj]
 ```
 
-### Akcije iz Searcha
-- Otvori -> Otvori Asset Detail View
-- Dodaj -> Modal: "Dodaj u koju watchlistu?" -> Odabir -> Dodaj
+---
+
+## 13. FAVORITES & PINNING
+
+- Zvjezdica = favorit
+- Pin = na vrhu liste
+- Pin-ani assets prikazuju se PRVI
+- Redoslijed = pin_order u bazi
 
 ---
 
-## 11. FAVORITES & PINNING
+## 14. BULK ACTIONS
 
-- Favorit - oznaci asset zvjezdicom
-- Pin - pinnati asset na vrh liste
-- Pin-ani assets prikazuju se PRVI u watchlisti
-- Redoslijed pin-anih = pin_order broj u bazi
+- Long press -> checkbox mode
+- Akcije: Delete, Add to watchlist, Pin, Cancel
 
 ---
 
-## 12. BULK ACTIONS
-
-### Aktivacija
-- Long press na karticu -> pojavljuje se checkbox
-- ILI [Select Mode] gumb
-
-### Dostupne Akcije
-- Delete selected - obriši iz trenutne watchliste
-- Add to watchlist - dodaj u drugu watchlistu
-- Pin selected - pinaj na vrh
-- Cancel - izadi iz select mode-a
-
----
-
-## 13. WATCHLIST SHARING & IMPORT
-
-### Koncept
-- Korisnik 1 zeli watchlistu od Korisnika 2
-- Korisnik 1 daje svoj User ID Korisniku 2
-- Korisnik 2 generira Link + QR za Korisnika 1
-- Korisnik 1 importira watchlistu
-
-### Pravila Sharinga
-
-| Pravilo | Detalj |
-|---|---|
-| Tko moze importirati | SAMO korisnik na ciji je ID link kreiran |
-| Koliko puta | Multi-import - link ostaje validan |
-| Tip kopije | Direktna kopija - bez sinkronizacije |
-| Nakon importa | Nova lista ima vlastiti share_id |
-| Duplo ime | Vec postoji lista s istim imenom -> STOP |
-| Preimenuj | Korisnik moze promijeniti naziv pri importu |
-| Revoke | Nema mogucnosti ponistavanja linka |
-| Expiration | Nema - link ne istice |
+## 15. WATCHLIST SHARING & IMPORT
 
 ### Link Format
 ```
 https://app.com/import/{shareId}/{targetUserId}
 ```
 
----
-
-## 14. ADMIN PANEL
-
-### Pristup
-- SAMO korisnik s role = 'admin' (marko31071985@gmail.com)
-- Dostupan: Hamburger Menu -> Admin Panel
-- Admin NE MOZE pregledavati/mijenjati custom watchliste korisnika
-
-### Sekcija 1: User Management
-- Dodaj korisnika (email + PIN)
-- Obrisi korisnika
-- Pregled svih korisnika
-
-### Sekcija 2: Assets Management
-- Dodaj asset rucno
-- Uredi asset i parametre
-- Obrisi asset
-- Bulk import CSV (Faza 2+)
-- AI import (Faza 2+)
-
-### Sekcija 3: Parameter Definitions
-Admin definira koje parametre korisnici mogu koristiti:
-- Kljuc (npr. p_e_ratio)
-- Label (npr. P/E Ratio)
-- Tip podatka (decimal, integer, string)
-- Ikona i kategorija
-
-### Sekcija 4: Default Watchlist Management
-- Odaberi koji assets idu u default listu
-- Postavi parametre za svaki asset
-- Moze biti vise default watchlista
+### Pravila
+- Samo primatelj moze importirati
+- Direktna kopija (bez sinkronizacije)
+- Link ne istice
 
 ---
 
-## 15. NOTIFIKACIJE - ARHITEKTURA
+## 16. ADMIN PANEL
+
+### Sekcije
+1. User Management (dodaj/obrisi korisnike)
+2. Assets Management (dodaj/uredi/obrisi)
+3. Parameter Definitions (koje metrike postoje)
+4. Default Watchlist Management
+5. AI Import (Faza 9)
+
+---
+
+## 17. NOTIFIKACIJE - ARHITEKTURA
 
 ### 3 Tipa
 
-#### TIP 1: IN-APP
+#### TIP 1: IN-APP (Faza 4)
 ```
-Korisnik je u aplikaciji
-        |
 Toast: "NICK upravo usao u ACTION ZONE!"
-        |
 Sprema se u notifications tablicu
-        |
-Notification badge u gornjem kutu
 ```
 
-#### TIP 2: PUSH NOTIFICATION
+#### TIP 2: PUSH NOTIFICATION (Faza 5)
 ```
-Korisnik je zatvorio app
-        |
-Mobilna notifikacija na vrhu ekrana
+Firebase Cloud Messaging (FCM)
 "NICK - ACTION ZONE!"
-        |
-Trebam: Firebase Cloud Messaging (FCM)
 ```
 
-#### TIP 3: EMAIL
+#### TIP 3: EMAIL (Faza 5)
 ```
-Korisnik ima email notifikacije ukljucene
-        |
-Email: "NICK - ACTION ZONE Alert"
-        |
-Trebam: SendGrid ili Resend + Supabase Triggers
+SendGrid
+"NICK - ACTION ZONE Alert"
 ```
 
-Faza 1: Tablice kreirane, arhitektura postavljena, BEZ aktivne implementacije.
-Faza 2+: Implementacija Push i Email.
+### Triggeri
+- Asset ulazi u ACTION ZONE
+- DVOSTRUKI SIGNAL aktivan
+- STOP LOSS probijen
+- Novi earnings izvjestaj + AI sazetak
+- Insider kupovina/prodaja
+- Analyst upgrade/downgrade
 
 ---
 
-## 16. OFFLINE SUPPORT
-
-### Jednostavna Verzija (IndexedDB)
+## 18. OFFLINE SUPPORT (Faza 6)
 
 ```
-ONLINE:
-1. Dohvati iz Supabase-a
-2. Spremi u IndexedDB
-3. Prikazi korisniku
-
-OFFLINE:
-1. Nema interneta -> citaj iz IndexedDB
-2. Prikazi zadnje poznate podatke
-3. Prikazi: "Offline - podaci mogu biti stari"
-
-POVRATAK ONLINE:
-1. Automatski azuriraj iz Supabase-a
-2. Makni offline indikator
+ONLINE:  Supabase -> IndexedDB -> Prikaz
+OFFLINE: IndexedDB -> Prikaz + "Offline - podaci stari"
+POVRATAK: Automatski refresh iz Supabase
 ```
 
-Sto se cache-uje: Assets, Watchliste, parametri, User preferences
-Sto se NE cache-uje: Live cijene, Chart podaci
+Cache: Assets, Watchliste, Preferences
+Ne cache: Live cijene, Chart podaci
 
 ---
 
-## 17. DARK/LIGHT MODE
+## 19. DARK/LIGHT MODE (Faza 4)
 
-- Korisnik bira KLIKOM (nije automatski)
-- Dostupno: Hamburger Menu -> Displej
-- Toggle: Dark Mode ON/OFF | Light Mode ON/OFF
-- Preference se sprema u user_preferences tablicu
-- Primjenjuje se odmah pri kliku
-
-```
-Dark Mode  [toggle ON]
-Light Mode [toggle OFF]
-```
-
-Tailwind config: darkMode: ['class']
+- Toggle u Hamburger Meniju
+- Sprema se u user_preferences
+- Primjenjuje odmah
 
 ---
 
-## 18. CHARTS & GRAFICI
+## 20. CHARTS & GRAFICI
 
-### Mini Chart NA Karticama (NOVO - DODANO!)
-- Mala linijska krivulja u donjem dijelu svake asset kartice
-- Suptilna, ne zauzima previse prostora
-- Boja prati status kartice
-- Faza 1: Dummy podaci (sinusni val)
-- Faza 2+: Stvarni podaci iz yfinance
+### Mini Chart na Karticama
+- Mala linijska krivulja u donjem dijelu kartice
+- Boja prati status
+- Faza 4: Stvarni podaci
 
-### Mini Chart 24h (u Asset Detail View)
-- TradingView Lightweight Chart libraru
-- Linijski grafik zadnjih 24 sata
+### Mini Chart 24h (Detail View)
+- TradingView Lightweight Chart
 - Interaktivan (zoom, hover)
-- Faza 1: Dummy podaci
-- Faza 2+: Stvarni podaci
+- Faza 4: Stvarni podaci
 
 ### TradingView Full Chart
-- Gumb [Otvori TradingView] u Asset Detail View
-- Otvara se fullscreen ili nova kartica
-- Candlestick, volume, sve mogucnosti
-
-### Zasto Libraru (ne custom)?
-- Profesionalan prikaz
-- Sve mogucnosti ukljucene
-- Testiran od milijuna korisnika
-- Brze za razvoj
-- Besplatno za osnovnu upotrebu
+- Gumb [Otvori TradingView]
+- Fullscreen ili nova kartica
 
 ---
 
-## 19. BAZA PODATAKA - SUPABASE
+## 21. BAZA PODATAKA - SUPABASE
 
-Pristupni podaci:
-- URL: https://cpuhymueefwzozimqdjj.supabase.co
-- Anon Key: (u .env.local datoteci - NIKAD na GitHub!)
-- RLS: Ukljucen (Enable automatic RLS)
-
-### Strategija: JSONB za Fleksibilnost
-Parametri se cuvaju kao JSONB umjesto fiksnih kolona.
-Prednost: Dodavanje novih parametara bez mijenjanja strukture baze!
-
-### Sve Tablice
-
+### Trenutne Tablice (Implementirano)
 ```sql
--- 1. USERS
-CREATE TABLE users (
+-- profiles, watchlists, trading_assets
+-- (detalji u schema.sql)
+```
+
+### Nove Tablice (Faza 8+)
+```sql
+-- Fundamentalne metrike
+CREATE TABLE asset_fundamentals (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  email VARCHAR UNIQUE NOT NULL,
-  pin_hash VARCHAR NOT NULL,
-  role VARCHAR DEFAULT 'user',
-  is_active BOOLEAN DEFAULT true,
-  created_by UUID REFERENCES users(id),
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+  asset_id UUID REFERENCES trading_assets(id),
+  metric_key VARCHAR NOT NULL,
+  metric_value DECIMAL,
+  metric_text VARCHAR,
+  period VARCHAR,  -- 'TTM', 'Q4 2024', 'FY 2024'
+  fetched_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 2. ASSETS
-CREATE TABLE assets (
+-- AI sazetci izvjestaja
+CREATE TABLE earnings_summaries (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  ticker VARCHAR UNIQUE NOT NULL,
-  full_name VARCHAR NOT NULL,
-  sector VARCHAR,
-  created_by UUID REFERENCES users(id),
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+  asset_id UUID REFERENCES trading_assets(id),
+  period VARCHAR NOT NULL,  -- 'Q4 2024'
+  report_date DATE,
+  eps_actual DECIMAL,
+  eps_estimate DECIMAL,
+  eps_surprise_pct DECIMAL,
+  revenue_actual DECIMAL,
+  revenue_estimate DECIMAL,
+  revenue_surprise_pct DECIMAL,
+  ai_summary TEXT,
+  ai_sentiment VARCHAR,  -- 'Bullish', 'Bearish', 'Neutral'
+  ai_score INTEGER,  -- 1-10
+  key_points JSONB,
+  risks JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 3. PARAMETER DEFINITIONS
-CREATE TABLE parameter_definitions (
+-- Vijesti
+CREATE TABLE asset_news (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  key VARCHAR UNIQUE NOT NULL,
-  label VARCHAR NOT NULL,
-  description TEXT,
-  data_type VARCHAR DEFAULT 'decimal',
-  icon VARCHAR,
-  category VARCHAR,
-  is_default BOOLEAN DEFAULT false,
-  created_by UUID REFERENCES users(id),
-  created_at TIMESTAMP DEFAULT NOW()
-);
-
--- 4. DEFAULT WATCHLISTS
-CREATE TABLE default_watchlists (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  name VARCHAR NOT NULL,
-  description TEXT,
-  created_by UUID REFERENCES users(id),
-  is_active BOOLEAN DEFAULT true,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
-);
-
--- 5. DEFAULT WATCHLIST ASSETS
--- asset_parameters primjer:
--- {
---   "demand_zone_low": 26.00,
---   "demand_zone_high": 28.00,
---   "stop_loss": 25.50,
---   "sfp_invalid": 25.20,
---   "cycle_countdown_days": 3,
---   "hurst_bias": "Bullish Correction",
---   "supply_zone_low": 30.00,
---   "supply_zone_high": 31.50
--- }
-CREATE TABLE default_watchlist_assets (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  default_watchlist_id UUID REFERENCES default_watchlists(id) ON DELETE CASCADE,
-  asset_id UUID REFERENCES assets(id) ON DELETE CASCADE,
-  asset_parameters JSONB DEFAULT '{}',
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
-);
-
--- 6. USER CUSTOM WATCHLISTS
-CREATE TABLE user_watchlists (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  name VARCHAR NOT NULL,
-  description TEXT,
-  share_id VARCHAR UNIQUE DEFAULT gen_random_uuid()::text,
-  is_shareable BOOLEAN DEFAULT true,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT unique_name_per_user UNIQUE(user_id, name)
-);
-
--- 7. USER WATCHLIST ASSETS
-CREATE TABLE user_watchlist_assets (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_watchlist_id UUID REFERENCES user_watchlists(id) ON DELETE CASCADE,
-  asset_id UUID REFERENCES assets(id) ON DELETE CASCADE,
-  asset_parameters JSONB DEFAULT '{}',
-  inherited_from_default_id UUID REFERENCES default_watchlist_assets(id) NULL,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
-);
-
--- 8. WATCHLIST SHARES
-CREATE TABLE watchlist_shares (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  watchlist_id UUID REFERENCES user_watchlists(id) ON DELETE CASCADE,
-  shared_by_user_id UUID REFERENCES users(id),
-  shared_to_user_id UUID REFERENCES users(id),
-  share_link VARCHAR UNIQUE NOT NULL,
-  can_import BOOLEAN DEFAULT true,
-  created_at TIMESTAMP DEFAULT NOW()
-);
-
--- 9. WATCHLIST IMPORTS
-CREATE TABLE watchlist_imports (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  original_watchlist_id UUID REFERENCES user_watchlists(id),
-  shared_by_user_id UUID REFERENCES users(id),
-  imported_by_user_id UUID REFERENCES users(id),
-  new_watchlist_id UUID REFERENCES user_watchlists(id),
-  import_date TIMESTAMP DEFAULT NOW()
-);
-
--- 10. USER ASSET PREFERENCES
-CREATE TABLE user_asset_preferences (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  asset_id UUID REFERENCES assets(id) ON DELETE CASCADE,
-  is_favorite BOOLEAN DEFAULT false,
-  is_pinned BOOLEAN DEFAULT false,
-  pin_order INTEGER,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT unique_user_asset UNIQUE(user_id, asset_id)
-);
-
--- 11. NOTIFICATION PREFERENCES (Arhitektura)
-CREATE TABLE notification_preferences (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  in_app_enabled BOOLEAN DEFAULT true,
-  push_enabled BOOLEAN DEFAULT false,
-  email_enabled BOOLEAN DEFAULT false,
-  notify_action_zone BOOLEAN DEFAULT true,
-  notify_double_signal BOOLEAN DEFAULT true,
-  notify_cycle_complete BOOLEAN DEFAULT true,
-  notify_custom_price BOOLEAN DEFAULT false,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
-);
-
--- 12. NOTIFICATIONS (Arhitektura)
-CREATE TABLE notifications (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  type VARCHAR NOT NULL,
+  asset_id UUID REFERENCES trading_assets(id),
   title VARCHAR NOT NULL,
-  message TEXT,
-  asset_id UUID REFERENCES assets(id),
-  sent_via_in_app BOOLEAN DEFAULT false,
-  sent_via_push BOOLEAN DEFAULT false,
-  sent_via_email BOOLEAN DEFAULT false,
-  read BOOLEAN DEFAULT false,
-  read_at TIMESTAMP NULL,
-  created_at TIMESTAMP DEFAULT NOW(),
-  expires_at TIMESTAMP NULL
+  summary TEXT,
+  source VARCHAR,
+  url VARCHAR,
+  published_at TIMESTAMPTZ,
+  sentiment VARCHAR,
+  created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 13. DEVICE TOKENS (Push - Arhitektura)
-CREATE TABLE device_tokens (
+-- Insider trading
+CREATE TABLE insider_transactions (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  device_id VARCHAR NOT NULL,
-  fcm_token VARCHAR NOT NULL,
-  platform VARCHAR,
-  is_active BOOLEAN DEFAULT true,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+  asset_id UUID REFERENCES trading_assets(id),
+  insider_name VARCHAR,
+  insider_role VARCHAR,
+  transaction_type VARCHAR,  -- 'BUY', 'SELL'
+  shares INTEGER,
+  price DECIMAL,
+  value DECIMAL,
+  transaction_date DATE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 14. USER PREFERENCES
-CREATE TABLE user_preferences (
+-- Korisnicke preference za metrike
+CREATE TABLE user_metric_preferences (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  theme VARCHAR DEFAULT 'dark',
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+  user_id UUID REFERENCES profiles(id),
+  asset_id UUID REFERENCES trading_assets(id),
+  card_metrics JSONB,  -- koje metrike na kartici
+  created_at TIMESTAMPTZ DEFAULT NOW()
 );
 ```
 
 ---
 
-## 20. STRUKTURA PROJEKTA
+## 22. STRUKTURA PROJEKTA
 
 ```
-Aplikacija-za-trejdanje/
-|
-+-- app/
-|   +-- (auth)/
-|   |   +-- login/
-|   |   |   +-- page.tsx
-|   |   +-- layout.tsx
-|   |
-|   +-- (dashboard)/
-|   |   +-- watchlist/
-|   |   |   +-- page.tsx
-|   |   +-- risk-engine/
-|   |   |   +-- page.tsx
-|   |   +-- admin/
-|   |   |   +-- page.tsx
-|   |   |   +-- users/page.tsx
-|   |   |   +-- assets/page.tsx
-|   |   |   +-- default-watchlist/page.tsx
-|   |   +-- layout.tsx
-|   |
-|   +-- api/
-|   |   +-- notifications/route.ts
-|   |   +-- search/route.ts
-|   |   +-- sync/route.ts
-|   |   +-- charts/route.ts
-|   |
-|   +-- import/
-|   |   +-- [shareId]/
-|   |       +-- [targetUserId]/
-|   |           +-- page.tsx
-|   |
-|   +-- layout.tsx
-|   +-- page.tsx
-|   +-- globals.css
-|
-+-- components/
-|   +-- navigation/
-|   |   +-- BottomNav.tsx
-|   |   +-- HamburgerMenu.tsx
-|   |   +-- SettingsPanel.tsx
-|   |
-|   +-- cards/
-|   |   +-- AssetCardMedium.tsx
-|   |   +-- AssetCardSmall.tsx
-|   |   +-- AssetDetailView.tsx
-|   |
-|   +-- watchlist/
-|   |   +-- WatchlistDropdown.tsx
-|   |   +-- PulseMetrics.tsx
-|   |   +-- FilterButtons.tsx
-|   |   +-- AssetDetailParams.tsx
-|   |   +-- ShareWatchlist.tsx
-|   |
-|   +-- risk/
-|   |   +-- RiskCalculator.tsx
-|   |
-|   +-- search/
-|   |   +-- GlobalSearch.tsx
-|   |
-|   +-- charts/
-|   |   +-- MiniChartCard.tsx       <- NOVO (mini chart na karticama)
-|   |   +-- MiniChart24h.tsx        <- (u Asset Detail View)
-|   |   +-- TradingViewChart.tsx
-|   |   +-- ProximityVisual.tsx     <- NOVO (full proximity visual)
-|   |
-|   +-- notifications/
-|   |   +-- NotificationCenter.tsx
-|   |   +-- NotificationBadge.tsx
-|   |   +-- NotificationPreferences.tsx
-|   |
-|   +-- offline/
-|   |   +-- OfflineIndicator.tsx
-|   |
-|   +-- theme/
-|   |   +-- ThemeToggle.tsx
-|   |
-|   +-- admin/
-|   |   +-- UserManagement.tsx
-|   |   +-- AssetManagement.tsx
-|   |   +-- ParameterDefinitions.tsx
-|   |   +-- DefaultWatchlistManager.tsx
-|   |
-|   +-- ui/
-|       +-- ProximityBar.tsx        <- mini verzija (na karticama)
-|       +-- ProximityVisual.tsx     <- full verzija (u detail view) NOVO
-|       +-- StatusBadge.tsx
-|       +-- Button.tsx
-|       +-- Modal.tsx
-|       +-- BottomSheet.tsx
-|       +-- QRCodeDisplay.tsx
-|
-+-- lib/
-|   +-- supabase.ts
-|   +-- auth.ts
-|   +-- notifications.ts
-|   +-- offline.ts
-|   +-- cache.ts
-|   +-- theme.ts
-|   +-- designTokens.ts
-|   +-- validators.ts
-|
-+-- hooks/
-|   +-- useWatchlist.ts
-|   +-- useAssets.ts
-|   +-- useSearch.ts
-|   +-- useTheme.ts
-|   +-- useOffline.ts
-|
-+-- types/
-|   +-- asset.ts
-|   +-- watchlist.ts
-|   +-- user.ts
-|   +-- notifications.ts
-|
-+-- docs/
-|   +-- PHASE_1_SPECIFICATION.md
-|
-+-- public/
-|   +-- icons/
-|
-+-- package.json
-+-- tsconfig.json
-+-- tailwind.config.ts
-+-- next.config.ts
-+-- postcss.config.js
-+-- .env.local  <- NIKAD na GitHub!
+trading-dashboard/
+├── .cursorrules
+├── .env.local (NIKAD na GitHub!)
+├── .env.local.example
+├── package.json
+├── tailwind.config.ts
+├── tsconfig.json
+├── next.config.js
+├── postcss.config.js
+│
+├── app/
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── (auth)/
+│   │   └── login/page.tsx
+│   ├── (dashboard)/
+│   │   ├── layout.tsx
+│   │   ├── watchlist/page.tsx
+│   │   ├── risk-engine/page.tsx
+│   │   ├── organizacija/page.tsx
+│   │   └── admin/
+│   │       ├── page.tsx
+│   │       ├── users/page.tsx
+│   │       ├── assets/page.tsx
+│   │       └── watchlist/page.tsx
+│   └── api/
+│       ├── prices/route.ts
+│       ├── fundamentals/route.ts (Faza 8)
+│       ├── news/route.ts (Faza 8)
+│       ├── earnings/route.ts (Faza 8)
+│       └── ai-analysis/route.ts (Faza 9)
+│
+├── components/
+│   ├── layout/
+│   │   ├── BottomNav.tsx
+│   │   ├── Header.tsx
+│   │   └── HamburgerMenu.tsx
+│   ├── watchlist/
+│   │   ├── AssetCard.tsx
+│   │   ├── StatusBadge.tsx
+│   │   ├── ProximityBar.tsx
+│   │   ├── FilterPills.tsx
+│   │   └── StatsBar.tsx
+│   ├── modals/
+│   │   ├── AssetDetailModal.tsx
+│   │   └── HamburgerMenu.tsx
+│   ├── fundamentals/ (Faza 8)
+│   │   ├── FundamentalsTab.tsx
+│   │   ├── MetricCard.tsx
+│   │   └── SectorComparison.tsx
+│   ├── news/ (Faza 8)
+│   │   ├── NewsTab.tsx
+│   │   └── AISummaryCard.tsx
+│   ├── charts/ (Faza 4)
+│   │   ├── MiniChart.tsx
+│   │   └── Chart24h.tsx
+│   └── risk/
+│       └── RiskCalculator.tsx
+│
+├── lib/
+│   ├── types.ts
+│   ├── supabase.ts
+│   ├── trading-logic.ts
+│   ├── utils.ts
+│   ├── fundamentals.ts (Faza 8)
+│   └── ai-analysis.ts (Faza 9)
+│
+├── hooks/
+│   ├── useAssets.ts
+│   ├── usePrices.ts
+│   ├── useFundamentals.ts (Faza 8)
+│   └── useRiskEngine.ts
+│
+└── supabase/
+    └── schema.sql
 ```
 
 ---
 
-## 21. INICIJALNI TESTNI PODACI
+## 23. INICIJALNI TESTNI PODACI
 
-### Asset 1: NICK
-```json
-{
-  "ticker": "NICK",
-  "full_name": "Nickel Futures",
-  "sector": "Energija",
-  "status": "DVOSTRUKI SIGNAL",
-  "confidence": "H",
-  "current_price": 26.23,
-  "price_change_percent": 1.5,
-  "parameters": {
-    "demand_zone_low": 26.00,
-    "demand_zone_high": 28.00,
-    "stop_loss": 25.50,
-    "sfp_invalid": 25.20,
-    "cycle_countdown_days": 3,
-    "hurst_bias": "Bullish Correction",
-    "supply_zone_low": 30.00,
-    "supply_zone_high": 31.50
-  }
-}
+### Trenutno u Bazi
+- NICK H - Nickel Futures (ROBA)
+- HAL M - Halliburton (ENERGIJA)
+- BTC-USD - Bitcoin (KRIPTO)
+- VALE - Vale S.A. (ROBA)
+- GLD - SPDR Gold Shares (ETF)
+
+### Planirani Asseti (US Dionice)
+```
+Energija: HAL, SLB, XOM, CVX, OXY
+Metali:   NICK, VALE, BHP, RIO
+Tech:     AAPL, MSFT, NVDA, GOOGL
+Finance:  JPM, BAC, GS
+ETF:      GLD, SLV, XLE, SPY
+Kripto:   BTC-USD, ETH-USD
 ```
 
-### Asset 2: HAL
-```json
-{
-  "ticker": "HAL",
-  "full_name": "Halliburton",
-  "sector": "Energija",
-  "status": "ACTION ZONE",
-  "confidence": "M",
-  "current_price": 18.50,
-  "price_change_percent": 2.3,
-  "parameters": {
-    "demand_zone_low": 18.00,
-    "demand_zone_high": 19.50,
-    "stop_loss": 17.00,
-    "sfp_invalid": 16.80,
-    "cycle_countdown_days": 7,
-    "hurst_bias": "Bullish",
-    "supply_zone_low": 20.00,
-    "supply_zone_high": 21.00
-  }
-}
+### EU Dionice (Faza 5+)
+```
+Frankfurt:  SAP, BASF, BMW, Volkswagen
+LSE:        Shell, HSBC, BP, Unilever
+Euronext:   LVMH, ASML, TotalEnergies
+```
+
+### ASX Dionice (Faza 5+)
+```
+BHP, CBA, NAB, WBC, ANZ,
+RIO, FMG, WES, CSL, MQG
 ```
 
 ---
 
-## 22. TRGOVACKA PRAVILA & LOGIKA
-
-### Detekcija Zona (Supply/Demand)
-- Cilj: Traziti ulaze ISKLJUCIVO izvan "Fair Value" zona
-- Visoko vjerojatne zone: brz odlazak cijene, malo vremena na nivou, netaknuti nivoi
-- Oscilatori (RSI, MACD): relevantni ISKLJUCIVO kada je cijena vec unutar kljucnih nivoa
-
-### Swing Failure Pattern (SFP) & Invalidation
-- SFP = cijena probije vrh/dno, pokupli likvidnost, ali NE ZATVORI izvan tog nivoa
-- Stop Loss tik iznad/ispod fitilja
-- SFP Invalidation Point = tocka ponistenja teze
+## 24. TRGOVACKA PRAVILA & LOGIKA
 
 ### Status Logika
 ```
 DVOSTRUKI SIGNAL = cijena u demand zoni + Hurst ciklus aktivan
-ACTION ZONE      = cijena unutar demand zone
-CIKLUS AKTIVAN   = Hurst ciklus aktivan, ceka zonu
+ACTION ZONE      = cijena unutar demand zone (bez Hurst)
+CIKLUS AKTIVAN   = Hurst ciklus aktivan, cijena ceka zonu
 STOP LOSS        = cijena ispod stop loss razine
+WATCH            = nista od gore
 ```
 
-### Taktike (Faza 2+)
-- Laddering: Fibonacci 0.618 i 0.786 rasporedivanje naloga
-- Compounding: Dodavanje na dobitni trade sa novim S/D set-upom
-- Averaging Down: Visoko rizicno - samo za masivni support
+### Proximity Racunanje
+```
+Cijena IZNAD zone:
+  proximity = ((cijena - demand_high) / demand_high) * 100
+
+Cijena UNUTAR zone:
+  proximity = 0%
+
+Cijena ISPOD zone:
+  proximity = 100%
+```
+
+### Laddering (Fibonacci)
+```
+Fib 0.618: 40% kapitala (konzervativniji ulaz)
+Fib 0.702: 35% kapitala (sredina)
+Fib 0.786: 25% kapitala (agresivniji ulaz)
+```
+
+### SFP (Swing Failure Pattern)
+```
+Cijena probije vrh/dno
+Pokuplja likvidnost
+NE ZATVORI izvan tog nivoa
+Stop Loss: tik iznad/ispod fitilja
+```
 
 ---
 
-## 23. ROADMAP - FAZA 2+
+## 25. PRICE API - STRATEGIJA
 
-### Faza 2
-- [ ] Live cijene (yfinance) - Smart Refresh 10s/60s
-- [ ] Push notifikacije (Firebase)
-- [ ] Email notifikacije (SendGrid)
-- [ ] PIN mijenjanje od strane korisnika
-- [ ] Bulk import CSV
-- [ ] Laddering kalkulator
-- [ ] Sprema trade setup-a
-- [ ] Price alerts
+### Trenutno (MVP)
+```
+Yahoo Finance (direktni fetch)
+├── Besplatno ✅
+├── Kašnjenje: 15-20 minuta ⚠️
+└── Neoficijalni API (moze prestati) ⚠️
+```
 
-### Faza 3+
-- [ ] AI import assets
-- [ ] Compounding kalkulator
-- [ ] Community watchliste
-- [ ] Multi-admin podrska
-- [ ] Export (PDF/CSV)
-- [ ] Sync importane watchliste
+### Faza 5 - Profesionalni Setup
+
+#### US Dionice + Kripto + Forex
+```
+Polygon.io - $29/mj
+├── Real-time (<1 sekunda) ✅
+├── NYSE, NASDAQ ✅
+├── Kripto ✅
+├── Forex ✅
+└── Opcije, Futures ✅
+```
+
+#### EU Dionice
+```
+Istraziti (trenutno nejasno pokriće):
+├── Polygon.io (provjeriti EU coverage)
+├── EODHD ($19/mj - dobro EU pokriće)
+└── Quandl/Nasdaq Data Link
+```
+
+#### ASX Dionice (Australija)
+```
+Opcije za istraziti:
+├── EODHD ($19/mj - ima ASX) ✅
+├── MarketStack ($9/mj - ima ASX)
+└── ASX direktni feed (skuplje)
+```
+
+#### Preporucena Kombinacija
+```
+Polygon.io:  $29/mj  (US + Kripto + Forex)
+EODHD:       $19/mj  (EU + ASX + historical)
+FMP:         $19/mj  (Fundamentali + Vijesti)
+─────────────────────────────────────────
+UKUPNO:      $67/mj  za profesionalni setup
+```
+
+#### Kripto Besplatno
+```
+Binance API (besplatno, real-time)
+├── BTC, ETH, i sve major altcoins
+└── <100ms kašnjenje
+```
+
+### Migracija
+```
+Migracija na novi API = promjena SAMO u:
+app/api/prices/route.ts
+└── ~1-2 sata rada
+```
+
+---
+
+## 26. ROADMAP - SVE FAZE
+
+### ✅ FAZA 1 — MVP Struktura
+```
+✅ Projekt struktura (.cursorrules, package.json...)
+✅ Dizajn sistem (dark glassmorphism, Space Grotesk)
+✅ Login stranica (6-znamenkasti PIN UI)
+✅ Watchlist s karticama (mock podaci)
+✅ Status logika (DVOSTRUKI SIGNAL, ACTION ZONE...)
+✅ Proximity bar (kompaktni + prosireni)
+✅ Risk kalkulator (osnovni)
+✅ Organizacija tab
+✅ Bottom navigation
+✅ Supabase schema (SQL)
+```
+
+### ✅ FAZA 2 — Live Podaci
+```
+✅ Supabase baza postavljena
+✅ Test podaci u bazi
+✅ Zamijena mock podataka sa Supabase upitima
+✅ Yahoo Finance live cijene (direktni fetch)
+✅ Popravak % promjene (chartPreviousClose)
+✅ Auto-refresh svake 30 sekundi
+✅ "Azurirano: HH:MM:SS" timestamp
+```
+
+### ⬜ FAZA 3 — Deploy (SUTRA)
+```
+⬜ Vercel account + deploy
+⬜ Environment varijable na Vercel
+⬜ Javni link (https://trading-dashboard-xxx.vercel.app)
+⬜ Testiranje na mobitelu bez lokalnog servera
+⬜ Custom domena (opcionalno)
+```
+
+### ⬜ FAZA 4 — Polish & UX
+```
+⬜ Login s PIN-om (pravi Supabase Auth)
+⬜ Hamburger menu (funkcionalan)
+⬜ Asset Detail Modal poboljsanja:
+   ⬜ Mini chart 24h (TradingView)
+   ⬜ Proximity bar s labelama (DZ/SL)
+   ⬜ SFP Invalid highlight
+   ⬜ Cycle days countdown (pravi datumi)
+⬜ Dark/Light mode toggle
+⬜ Swipe to delete (poboljsano)
+⬜ Favoriti i pinning
+⬜ Sort by Status funkcionalan
+⬜ Skeleton loading poboljsan
+```
+
+### ⬜ FAZA 5 — Notifikacije & Pravi Price API
+```
+⬜ Polygon.io integracija (US + Kripto)
+⬜ EODHD integracija (EU + ASX)
+⬜ Smart Refresh (10s aktivne zone, 60s ostale)
+⬜ Push notifikacije (Firebase Cloud Messaging)
+⬜ Email notifikacije (SendGrid)
+⬜ Triggeri: ACTION ZONE, DVOSTRUKI SIGNAL, STOP LOSS
+⬜ Notification Center u aplikaciji
+⬜ Notification preferences po korisniku
+```
+
+### ⬜ FAZA 6 — Offline & PWA
+```
+⬜ IndexedDB cache
+⬜ Offline indikator
+⬜ PWA manifest
+⬜ "Instaliraj na home screen" prompt
+⬜ Service Worker
+```
+
+### ⬜ FAZA 7 — Risk Engine 2.0
+```
+⬜ Ladder kalkulator (Fibonacci skaliranje)
+⬜ Compounding kalkulator
+⬜ Trade journal (zapis ulaza/izlaza)
+⬜ Portfolio tracker (ukupni P&L)
+⬜ Win rate statistike
+⬜ Export (PDF, CSV)
+```
+
+### ⬜ FAZA 8 — Fundamentalne Metrike
+```
+⬜ Financial Modeling Prep API ($19/mj)
+⬜ 50+ metrika po assetu
+⬜ Fundamentalni tab u Asset Detail View
+⬜ Color coding (zeleno/zuto/crveno vs sektor)
+⬜ Usporedba sa sektorskim prosjekom
+⬜ Earnings Calendar widget
+⬜ Insider trading prikaz
+⬜ Analyst ratings & price targets
+⬜ 2-3 metrike po izboru na kartici
+⬜ Vijesti tab po assetu
+⬜ Korisnik bira koje metrike vidi na kartici
+```
+
+### ⬜ FAZA 9 — AI Analiza
+```
+⬜ Claude API integracija
+⬜ Automatska analiza earnings izvjestaja
+⬜ AI sazetak (3-5 recenica)
+⬜ Beat/Miss detekcija (EPS, Revenue)
+⬜ Rizici izvuceni iz izvjestaja
+⬜ Sentiment analiza (Bullish/Bearish/Neutral)
+⬜ Conference call transcript analiza
+⬜ AI Score (1-10) za svaki asset
+⬜ Notifikacija s AI sazetkom
+⬜ Komparativna analiza (vs konkurencija)
+⬜ Screening po fundamentalima + tehnickim
+```
+
+### ⬜ FAZA 10 — Admin & Multi-User
+```
+⬜ Admin Panel (user management)
+⬜ Bulk import CSV
+⬜ Watchlist sharing (QR kod)
+⬜ Multi-user podrska
+⬜ PIN mijenjanje od strane korisnika
+⬜ Role-based access control
+```
+
+### ⬜ FAZA 11 — Skaliranje (Dugorocno)
+```
+⬜ Tablet/Desktop responzivni layout
+⬜ Capacitor.js (pakiranje u native app)
+⬜ Google Play Store deploy
+⬜ Apple App Store deploy
+⬜ Subscription model (opcionalno)
+⬜ Community watchliste
+⬜ API za vanjske integracije
+```
+
+---
+
+## TROSKOVNIK (Kad sve bude gotovo)
+
+```
+Vercel Pro:              $20/mj
+Supabase Pro:            $25/mj
+Polygon.io Professional: $29/mj
+EODHD:                   $19/mj
+Financial Modeling Prep: $19/mj
+Claude API:              ~$5/mj
+──────────────────────────────
+UKUPNO:                 ~$117/mj
+
+vs Bloomberg Terminal:  $2,000/mj
+Usteda:                 ~$1,883/mj 😄
+```
 
 ---
 
 ## VAZNE NAPOMENE
 
-1. .env.local NIKAD na GitHub!
+1. `.env.local` NIKAD na GitHub!
 2. Supabase RLS je UKLJUCEN
-3. Admin email definiran u bazi
-4. Risk Calculator NE SPREMA rezultate u Fazi 1
-5. Sharing link - primatelj mora biti LOGIRAN
-6. Sve boje u lib/designTokens.ts
-7. Parametri su data-driven - dodaj u parameter_definitions bez mijenjanja koda
-
-## NOVI DIZAJN ELEMENTI (Verzija 2.0)
-
-### Dodano u ovoj verziji:
-1. MINI CHART NA KARTICAMA - svaka asset kartica ima mali linijski grafik
-2. FULL PROXIMITY VISUAL - u Asset Detail View:
-   - Gradijent linija (zelena -> zuta -> crvena)
-   - Marker/pointer za trenutnu cijenu
-   - DZ oznaka (Demand Zone)
-   - SL oznaka (Stop Loss)
-   - Tekst objasnjenje ("Cijena je unutar Demand Zone. Blizina SL je 2.86%")
-   - Glassmorphism kartica oko cijelog elementa
-3. HAMBURGER MENU - toggle za Dark/Light mode sa vizualnim toggle switchevima
+3. Admin email: marko31071985@gmail.com
+4. Risk Calculator NE SPREMA rezultate (za sada)
+5. Yahoo Finance je privremeno rjesenje
+6. Sve boje definirane u `tailwind.config.ts`
+7. Sve poslovne logike u `lib/trading-logic.ts`
+8. Migracija price API-ja = samo `app/api/prices/route.ts`
 
 ---
 
-Dokument azuriran: Svibanj 2026
-Verzija: 2.0 - Dodani novi dizajn elementi
-Sljedeci korak: MVP kodiranje - Faza 1
+**Dokument azuriran:** Svibanj 2026  
+**Verzija:** 3.0  
+**Autor:** Marko + Claude AI  
+**Sljedeci korak:** Faza 3 - Vercel Deploy
